@@ -9,7 +9,12 @@ export default {
     themes: ["winter","night"],
   },
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        pacifico: ["Pacifico", "cursive"],
+        raleway: ["Raleway", "sans-serif"],
+      }
+    },
   },
   plugins: [require("daisyui")],
 }
