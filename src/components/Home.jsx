@@ -1,25 +1,26 @@
+import heroimg from "../asset/heroimg.jpg";
 
 const Home = () => {
   return (
+    <>
     <div
       className="hero min-h-screen"
       style={{
-        backgroundImage: `url("/images/stock/photo-1507358522600-9f71e620c44e.jpg")`,
+        backgroundImage: `url(${heroimg})`,
       }}
     >
       <div className="hero-overlay bg-opacity-60"></div>
       <div className="hero-content text-center text-neutral-content">
-        <div className="max-w-md">
-          <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
-          <p className="mb-5">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+        <div className="max-w-lg">
+          <h1 className="mb-1 text-5xl font-bold">Welcome To <span className="text-primary">FoodyBd</span></h1>
+          <p className="mb-8 text-right">- Embark on a flavorful journey</p>
+          <p className="mb-5 text-lg">
+          Discover the bold and delicious flavors of Bangladeshi cuisine on our FoodyBD. From savory curries to sweet desserts, our recipes celebrate the unique blend of spices, herbs, and fresh ingredients that make this cuisine a culinary adventure. Join us and explore the secrets of Bangladeshi cuisine!
           </p>
-          <button className="btn btn-primary">Get Started</button>
         </div>
       </div>
     </div>
+    </>
   );
 };
 
