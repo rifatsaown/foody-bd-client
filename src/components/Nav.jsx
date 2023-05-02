@@ -1,11 +1,15 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import profilephoto from "../asset/profile.png";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Nav = () => {
-  const { user } = useContext(AuthContext);
-  console.log(user);
+  const { user , logOut} = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut();
+  }
+
   return (
     <div className=" absolute backdrop-blur-lg w-full">
       <div className="navbar lg:h-20 ">
@@ -76,14 +80,14 @@ const Nav = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <a >Logout</a>
+                    <a onClick={handleLogOut}>Logout</a>
                   </li>
                 </ul>
               </div>
             </>
           ) : (
             <>
-              <button className="btn btn-primary btn-outline">Log IN</button>
+              <Link to='/login' className="btn btn-primary btn-outline">Log IN</Link>
             </>
           )}
         </div>

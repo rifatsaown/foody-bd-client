@@ -1,22 +1,29 @@
-import { useContext} from "react";
+import { useContext } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import heroimg from "../asset/login.jpg";
 import { AuthContext } from "../provider/AuthProvider";
-import { ToastContainer, toast } from 'react-toastify';
+import { Link } from "react-router-dom";
 
 const Login = () => {
-  const { signInWithGoogle } = useContext(AuthContext);
+  const { signInWithGoogle , signInWithGithub} = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+  // Create sign in with github function
+  const handleGithubSignIn = () => {
+    signInWithGithub()
+      .then(() => {})
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
+  // Create sign in with google function
   const handleGoogleSignIn = () => {
     signInWithGoogle()
-      .then((result) => {
-        console.log(result.user);
-        toast.success("Login Success");
-      })
+      .then(() => {})
       .catch((error) => {
-        
         toast.error(error.message);
       });
   };
@@ -41,7 +48,7 @@ const Login = () => {
                 </a>
               </div>
               <div className="form-control ">
-                <a className="btn btn-primary btn-outline">Login With Github</a>
+                <a onClick={handleGithubSignIn} className="btn btn-primary btn-outline">Login With Github</a>
               </div>
               <div className="flex items-center lg:my-4">
                 <div className="w-full h-[1.5px] bg-primary"></div>
@@ -68,9 +75,9 @@ const Login = () => {
                   className="input input-bordered"
                 />
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
+                  <p  className="label-text-alt ">
+                    New in FoodyBD? <Link to='/register' className="link link-hover text-primary">Register Now</Link>
+                  </p>
                 </label>
               </div>
               <div className="form-control mt-6">
