@@ -2,12 +2,17 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import profilephoto from "../asset/profile.png";
 import { AuthContext } from "../provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const Nav = () => {
   const { user , logOut} = useContext(AuthContext);
 
   const handleLogOut = () => {
-    logOut();
+    logOut().then(() => {
+      toast.success("Logout Success");
+    }).catch((error) => {
+      toast.error(error.message);
+    });
   }
 
   return (

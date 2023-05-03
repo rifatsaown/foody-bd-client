@@ -1,19 +1,32 @@
 import { useContext } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import heroimg from "../asset/login.jpg";
 import { AuthContext } from "../provider/AuthProvider";
-import { Link } from "react-router-dom";
 
 const Login = () => {
-  const { signInWithGoogle , signInWithGithub} = useContext(AuthContext);
+  const { signInWithGoogle, signInWithGithub, signInWithEmail } =
+    useContext(AuthContext);
 
+  // Email and password login
   const handleSubmit = (e) => {
     e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    signInWithEmail(email, password)
+      .then(() => {
+        toast.success("Login Success");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
   // Create sign in with github function
   const handleGithubSignIn = () => {
     signInWithGithub()
-      .then(() => {})
+      .then(() => {
+        toast.success("Login Success with Github");
+      })
       .catch((error) => {
         toast.error(error.message);
       });
@@ -22,7 +35,9 @@ const Login = () => {
   // Create sign in with google function
   const handleGoogleSignIn = () => {
     signInWithGoogle()
-      .then(() => {})
+      .then(() => {
+        toast.success("Login Success with Google");
+      })
       .catch((error) => {
         toast.error(error.message);
       });
@@ -48,7 +63,12 @@ const Login = () => {
                 </a>
               </div>
               <div className="form-control ">
-                <a onClick={handleGithubSignIn} className="btn btn-primary btn-outline">Login With Github</a>
+                <a
+                  onClick={handleGithubSignIn}
+                  className="btn btn-primary btn-outline"
+                >
+                  Login With Github
+                </a>
               </div>
               <div className="flex items-center lg:my-4">
                 <div className="w-full h-[1.5px] bg-primary"></div>
@@ -60,7 +80,9 @@ const Login = () => {
                   <span className="label-text">Email</span>
                 </label>
                 <input
-                  type="text"
+                  type="email"
+                  required
+                  name="email"
                   placeholder="email"
                   className="input input-bordered"
                 />
@@ -70,13 +92,21 @@ const Login = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="text"
+                  type="password"
+                  required
+                  name="password"
                   placeholder="password"
                   className="input input-bordered"
                 />
                 <label className="label">
-                  <p  className="label-text-alt ">
-                    New in FoodyBD? <Link to='/register' className="link link-hover text-primary">Register Now</Link>
+                  <p className="label-text-alt ">
+                    New in FoodyBD?{" "}
+                    <Link
+                      to="/register"
+                      className="link link-hover text-primary"
+                    >
+                      Register Now
+                    </Link>
                   </p>
                 </label>
               </div>
@@ -87,7 +117,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };

@@ -1,8 +1,15 @@
 /* eslint-disable react/prop-types */
-import  { createContext, useEffect, useState } from 'react';
-import { GithubAuthProvider, getAuth, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
-import app from '../firebase/firebase.config';
-import { GoogleAuthProvider } from "firebase/auth";
+import {
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
+import { createContext, useEffect, useState } from "react";
+import app from "../firebase/firebase.config";
 
 export const AuthContext = createContext(null);
 
@@ -11,44 +18,56 @@ const auth = getAuth(app);
 const googleprovider = new GoogleAuthProvider();
 const githubprovider = new GithubAuthProvider();
 
-const AuthProvider = ({children}) => {
-    // Create user state
-    const [user, setUser] = useState(null);
-    // Create sign in with google function
-    const signInWithGoogle = () => {
-        return signInWithPopup(auth,googleprovider);
-    };
-    // Create sign in with github function
-    const signInWithGithub = () => {
-        return signInWithPopup(auth,githubprovider);
-    };
+const AuthProvider = ({ children }) => {
+  // Create user & loading state
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    // Create log out function
-    const logOut = () => {
-        return signOut(auth);
-    };
+  // Create sign in with email and password function
+  const signInWithEmail = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
-    // Observe user state
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth,(user) => {
-            setUser(user)
-        });
-        return () => unsubscribe();
-    }, []);
+  // Create sign in with google function
+  const signInWithGoogle = () => {
+    setLoading(true);
+    return signInWithPopup(auth, googleprovider);
+  };
+  // Create sign in with github function
+  const signInWithGithub = () => {
+    setLoading(true);
+    return signInWithPopup(auth, githubprovider);
+  };
 
-    // Create authInfo object and provide it to children components
-    const authInfo = {
-        user,
-        signInWithGoogle,
-        logOut,
-        signInWithGithub,
-    }
+  // Create log out function
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth);
+  };
 
-    return (
-        <AuthContext.Provider value={authInfo}>
-            {children}
-        </AuthContext.Provider>
-    );
+  // Observe user state
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // Create authInfo object and provide it to children components
+  const authInfo = {
+    user,
+    loading,
+    signInWithGoogle,
+    signInWithGithub,
+    signInWithEmail,
+    logOut,
+  };
+
+  return (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;
