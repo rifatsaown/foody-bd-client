@@ -1,11 +1,15 @@
 import Chefs from "./Chefs";
+import Contact from "./Contact";
+import Features from "./Features";
 import Hero from "./Hero";
 
 const Home = () => {
   return (
     <>
-      <Hero></Hero>
-      <Chefs></Chefs>
+      <Hero/>
+      <Chefs/>
+      <Features/>
+      <Contact></Contact>
     </>
   );
 };

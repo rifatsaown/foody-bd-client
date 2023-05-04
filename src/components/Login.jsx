@@ -1,10 +1,13 @@
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import heroimg from "../asset/login.jpg";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
+  const location = useLocation();
+  console.log(location);
+  const from = location.state?.from || "/";
   const navigate = useNavigate();
   const { signInWithGoogle, signInWithGithub, signInWithEmail } =
     useContext(AuthContext);
@@ -17,7 +20,7 @@ const Login = () => {
     signInWithEmail(email, password)
       .then(() => {
         toast.success("Login Success");
-        navigate("/");
+        navigate(from);
       })
       .catch((error) => {
         toast.error(error.message);
@@ -28,6 +31,7 @@ const Login = () => {
     signInWithGithub()
       .then(() => {
         toast.success("Login Success with Github");
+        navigate(from);
       })
       .catch((error) => {
         toast.error(error.message);
@@ -39,6 +43,7 @@ const Login = () => {
     signInWithGoogle()
       .then(() => {
         toast.success("Login Success with Google");
+        navigate(from);
       })
       .catch((error) => {
         toast.error(error.message);
