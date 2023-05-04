@@ -72,7 +72,7 @@ const Nav = () => {
               <div className="dropdown dropdown-end ">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">
-                    <img src={user.photoURL || profilephoto} />
+                    <img src={user.photoURL?.length>5 ? user.photoURL : profilephoto } />
                   </div>
                 </label>
                 <ul
@@ -81,7 +81,7 @@ const Nav = () => {
                 >
                   <li>
                     <NavLink to="/profile" className="justify-between">
-                      {user.displayName}
+                      {user.displayName? user.displayName : "Profile"}
                     </NavLink>
                   </li>
                   <li>

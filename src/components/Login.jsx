@@ -1,10 +1,11 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import heroimg from "../asset/login.jpg";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
+  const navigate = useNavigate();
   const { signInWithGoogle, signInWithGithub, signInWithEmail } =
     useContext(AuthContext);
 
@@ -16,6 +17,7 @@ const Login = () => {
     signInWithEmail(email, password)
       .then(() => {
         toast.success("Login Success");
+        navigate("/");
       })
       .catch((error) => {
         toast.error(error.message);

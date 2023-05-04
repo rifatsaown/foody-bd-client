@@ -1,11 +1,38 @@
-import { Link } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { updateProfile } from "firebase/auth";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import heroimg from "../asset/login.jpg";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const { registerWithEmail } = useContext(AuthContext);
   const handleSubmit = (e) => {
     e.preventDefault();
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const photoUrl = e.target.photoUrl.value;
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
+    registerWithEmail(email, password)
+      .then((res) => {
+        toast.success("Register Success");
+        profile(res.user, name, photoUrl);
+        navigate("/")
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
+
+  const profile = (currentUser, name, photoUrl) => {
+    updateProfile(currentUser, { displayName: name, photoURL: photoUrl });
+  };
+
   return (
     <div
       className="hero min-h-screen pt-20 sm:pt-20"
