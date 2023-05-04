@@ -17,5 +17,5 @@ This is a food service app. This is a full stack project.
 [https://foody-bd-server.vercel.app/chef/](https://foody-bd-server.vercel.app/chef/)
 
 ## Code Link: 
- https://github.com/rifatsaown/foody-bd-client
- https://github.com/rifatsaown/foody-bd-server
+ [https://github.com/rifatsaown/foody-bd-client](https://github.com/rifatsaown/foody-bd-client)
+ [https://github.com/rifatsaown/foody-bd-server](https://github.com/rifatsaown/foody-bd-server)
