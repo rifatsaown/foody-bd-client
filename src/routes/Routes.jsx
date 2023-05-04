@@ -3,6 +3,7 @@ import MainLayout from "../MainLayout";
 import Home from "../components/Home";
 import Login from "../components/Login";
 import Register from "../components/Register";
+import ChefDetails from "../components/ChefDetails";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,11 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register/>
+            },
+            {
+                path: "/chef/:id",
+                element: <ChefDetails/>,
+                loader: ({params}) => fetch(`https://foody-bd-server.vercel.app/chef/${params.id}`),
             }
         ]
     },
