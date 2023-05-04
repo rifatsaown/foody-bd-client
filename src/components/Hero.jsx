@@ -1,8 +1,10 @@
+import LazyLoad from "react-lazy-load";
 import heroimg from "../asset/heroimg.jpg";
 
 const Hero = () => {
   return (
     <>
+      <LazyLoad>
       <div
         className="hero min-h-screen"
         style={{
@@ -26,6 +28,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
+      </LazyLoad>
     </>
   );
 };

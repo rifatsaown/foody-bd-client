@@ -80,7 +80,7 @@ const Nav = () => {
                   className="menu text-white menu-compact dropdown-content mt-3 p-2 bg-primary-focus rounded-box w-52"
                 >
                   <li>
-                    <NavLink to="/profile" className="justify-between">
+                    <NavLink className="justify-between">
                       {user.displayName? user.displayName : "Profile"}
                     </NavLink>
                   </li>

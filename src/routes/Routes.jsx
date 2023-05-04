@@ -6,6 +6,7 @@ import Register from "../components/Register";
 import ChefDetails from "../components/ChefDetails";
 import PrivateRoutes from "./PrivateRoutes";
 import ErrorPage from "../components/ErrorPage";
+import Blog from "../components/Blog";
 
 const router = createBrowserRouter([
     {
@@ -28,6 +29,9 @@ const router = createBrowserRouter([
                 path: "/chef/:id",
                 element: <PrivateRoutes><ChefDetails/></PrivateRoutes>,
                 loader: ({params}) => fetch(`https://foody-bd-server.vercel.app/chef/${params.id}`),
+            },{
+                path: "/blog",
+                element: <Blog/>
             }
         ]
     },
