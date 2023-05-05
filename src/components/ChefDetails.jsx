@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import chefBg from "../asset/chef.jpg";
 import Recipe from "./Recipe";
+import useTitle from "./hooks/useTitle";
 
 const ChefDetails = () => {
   const data = useLoaderData();
@@ -14,6 +15,7 @@ const ChefDetails = () => {
     recipes,
   } = data;
   return (
+    useTitle(chef_name),
     <>
       <div
         style={{

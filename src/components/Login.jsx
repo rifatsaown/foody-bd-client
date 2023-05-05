@@ -3,10 +3,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import heroimg from "../asset/login.jpg";
 import { AuthContext } from "../provider/AuthProvider";
+import useTitle from "./hooks/useTitle";
 
 const Login = () => {
+  useTitle("Login");
   const location = useLocation();
-  console.log(location);
   const from = location.state?.from || "/";
   const navigate = useNavigate();
   const { signInWithGoogle, signInWithGithub, signInWithEmail } =

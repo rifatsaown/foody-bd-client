@@ -4,8 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import heroimg from "../asset/login.jpg";
 import { AuthContext } from "../provider/AuthProvider";
+import useTitle from "./hooks/useTitle";
 
 const Register = () => {
+  useTitle("Register");
   const navigate = useNavigate();
   const { registerWithEmail } = useContext(AuthContext);
   const handleSubmit = (e) => {
